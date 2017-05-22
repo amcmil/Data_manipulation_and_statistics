@@ -11,7 +11,6 @@ out[,i]<-t$p.value
 }
 
 #fdr correction on pvalues to account for multiple testing
-
 td<-as.data.frame(out)
 fdr=p.adjust(td,method="fdr")
 pval<-t(rbind(out,fdr))
