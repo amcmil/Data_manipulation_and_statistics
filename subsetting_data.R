@@ -5,7 +5,7 @@
 keep<-mdata[mdata$"variable"==x | mdata$"variable"==y,]
 
 #to keep samples in metadata table with variable1 = x and variable2 = y. "&" denotes "AND"
-keep<-mdata[mdata$"variable1"==x | mdata$"variable1"==y,]
+keep<-mdata[mdata$"variable1"==x & mdata$"variable2"==y,]
 
 #to keep samples in metadata table with variable between numbers x and y.
 keep<-mdata[mdata$"variable1"<x & mdata$"variable1">y,]
@@ -15,3 +15,6 @@ met_new<-met_t[rownames(keep),]
  
 #using not operator (!)
 met_rem<-met[!(rownames(met) %in% rownames(ids)),]
+
+#to keep samples in "met" based on parameters in "mdata" use "which" operator
+met_keep<-a.data.frame(met[which(mdata$"variable1"==x),])

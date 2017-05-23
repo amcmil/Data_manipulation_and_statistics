@@ -1,5 +1,15 @@
+#Amy Mcmillan 05/23/17
 #R basics
-#[rows,columns]
+"#" (hash) symobols are ignored by R. Used these to document your code
+
+# "$" specifies column name in data frame. For examples to call column "BMI" in variable "met"
+met$"BMI"
+
+#square brackets are used to call specific rows or columns
+[rows,columns]
+
+#to call row 2 in variable "met" for example
+met[2,]
 
 #set working directory where you will pull files from
 setwd("/path to files")

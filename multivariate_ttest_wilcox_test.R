@@ -1,6 +1,5 @@
 #for ttest for every metabolite in column of matrix met_t
 #replace t.test with wilcox.test for nonparametric test
-#assumes data is on log2 scale
 
 out<-matrix(data=NA, nrow =1, ncol=ncol(met_t))
 colnames(out)<-colnames(met_t)
@@ -21,8 +20,7 @@ colnames(out_Cond1)<-colnames(met_t)
 
 for(i in 1:ncol(met_t)){
 fc<-(mean(met_t[,i] [which (mdata$"group"=="Cond1" )]))-((mean(met_t[,i] [which (mdata$"group"=="Cond2" )])))
-2^fc
-out_Cond1[,i]<-2^fc 
+out_Cond1[,i]<-fc 
 }
 
 out_Cond2<-matrix(data=NA, nrow =1, ncol=ncol(met_t))
@@ -30,15 +28,14 @@ colnames(out_Cond2)<-colnames(met_t)
 
 for(i in 1:ncol(met_t)){
 fc<-(mean(met_t[,i] [which (mdata$"group"=="Cond2" )]))-((mean(met_t[,i] [which (mdata$"group"=="Cond1" )])))
-2^fc
-out_Cond2[,i]<-2^fc 
+out_Cond2[,i]<-fc 
 }
 
-out_SAM_t<-t(out_Cond1)
-out_Cont_t<-t(out_Cond2)
+out_Cond1_t<-t(out_Cond1)
+out_Cond2_t<-t(out_Cond2)
 
 #Contatinate
-sig<-cbind(out_SAM_t,out_Cont_t,pval)
+sig<-cbind(out_Cond1_t,out_Cond2_t,pval)
 
 #write table
 write.table(sig,"pval_wilxoc_fc.txt",sep="\t",col.names=NA)
